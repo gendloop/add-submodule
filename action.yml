@@ -1,0 +1,45 @@
+name: add-submodule
+author: gendloop
+description: 'add-submodule'
+
+inputs:
+  label:
+    description: 'Repository Label'
+    required: true
+    default: ''
+  repo_name:
+    description: 'Repository Name'
+    required: true
+    default: ''
+  branch:
+    description: 'Default Branch'
+    required: true
+    default: 'main'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: checkout
+        uses: actions/checkout@v3
+
+    - name: add-submodule
+      shell: bash
+      run: |
+        # config
+        git config --global user.name "$GITHUB_ACTOR"
+        git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        # add-submodule
+        git submodule add -b ${{ inputs.branch }} https://github.com/$GITHUB_ACTOR/${{ inputs.repo_name }}
+        git submodule init
+        git submodule update
+        git add .
+        git commit -m "feat: add submodule ${{ inputs.repo_name }}"
+        git push
+
+    - name: update-README.md
+      shell: bash
+      run: |
+        sed -i '3i [![${{ inputs.repo_name }}](https://img.shields.io/static/v1?label=${{ inputs.label }}&message=${{ inputs.repo_name }}&color=blue)](https://github.com/gendloop/${{ inputs.repo_name }}/tree/${{ inputs.branch }}) ' README.md
+        git add .
+        git commit -m "chore: update README.md"
+        git push
