@@ -23,6 +23,8 @@ runs:
       uses: actions/checkout@v3
       with:
         submodules: 'recursive'
+      env:
+        GIT_TERMINAL_PROMPT: 0
 
     - name: add-submodule
       shell: bash
