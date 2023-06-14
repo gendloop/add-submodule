@@ -28,11 +28,11 @@ runs:
         GITHUB_TOKEN: ${{ github.token }}
       run: |
         # config
-        git config --global user.name "${{ github.actor }}"
-        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+        git config --global user.name "gendloop"
+        git config --global user.email "gendloop@163.com"
         git config --global http.sslVerify false
         # add-submodule
-        git submodule add -b ${{ inputs.branch }} https://github.com/${{ github.repository_owner }}/${{ inputs.repo_name }}
+        git submodule add -b ${{ inputs.branch }} https://github.com/${{ github.repository_owner }}/${{ inputs.repo_name }}.git
         git submodule init
         git submodule update
         git add .
