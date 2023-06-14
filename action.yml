@@ -15,6 +15,10 @@ inputs:
     description: 'Default Branch'
     required: true
     default: 'main'
+  token:
+    description: 'Personal token'
+    required: true
+    default: ${{ github.token }}
 
 runs:
   using: 'composite'
@@ -25,7 +29,7 @@ runs:
     - name: add-submodule
       shell: bash
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.token }}
       run: |
         # config
         git config --global user.name "${{ github.repository_owner }}"
