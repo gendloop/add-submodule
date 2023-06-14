@@ -21,7 +21,8 @@ runs:
   steps:
     - name: checkout
       uses: actions/checkout@v3
-      submodules: 'recursive'
+      with:
+        submodules: 'recursive'
 
     - name: add-submodule
       shell: bash
