@@ -30,6 +30,8 @@ runs:
 
     - name: add-submodule
       shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
       run: |
         # config
         git config --global user.name "$GITHUB_ACTOR"
