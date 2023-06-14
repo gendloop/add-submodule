@@ -24,6 +24,8 @@ runs:
 
     - name: add-submodule
       shell: bash
+      env: 
+        GITHUB_TOKEN: ${{ github.token }}
       run: |
         # config
         git config --global user.name "${{ github.actor }}"
