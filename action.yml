@@ -29,7 +29,7 @@ runs:
         git config --global user.name "${{ github.repository_owner }}"
         git config --global user.email "${{ github.repository_owner }}@users.noreply.github.com"
         # add-submodule
-        git submodule add -b ${{ inputs.branch }} https://github.com/${{ github.repository_owner }}/${{ inputs.repo_name }}
+        git submodule add -b ${{ inputs.branch }} git@github.com:${{ github.repository_owner }}/${{ inputs.repo_name }}.git
         git submodule init
         git submodule update
         git add .
