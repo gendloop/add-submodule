@@ -15,17 +15,23 @@ inputs:
     description: 'Default Branch'
     required: true
     default: 'main'
+  token:
+    description: 'Token'
+    required: true
+    default: ''
 
 runs:
   using: 'composite'
   steps:
     - name: checkout
       uses: actions/checkout@v3
+      with:
+        token: ${{ inputs.token }}
 
     - name: add-submodule
       shell: bash
       env: 
-        GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_TOKEN: ${{ inputs.token }}
       run: |
         # config
         git config --global user.name "gendloop"
