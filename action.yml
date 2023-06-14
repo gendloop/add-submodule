@@ -15,10 +15,6 @@ inputs:
     description: 'Default Branch'
     required: true
     default: 'main'
-  token:
-    description: 'Token'
-    required: true
-    default: ''
 
 runs:
   using: 'composite'
@@ -36,7 +32,6 @@ runs:
         # config
         git config --global user.name "$GITHUB_ACTOR"
         git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-        git config --global http.sslVerify false
         # add-submodule
         git submodule add -b ${{ inputs.branch }} https://github.com/${{ github.repository_owner }}/${{ inputs.repo_name }}
         git submodule init

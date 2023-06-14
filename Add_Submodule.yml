@@ -33,4 +33,3 @@ jobs:
           label: ${{ inputs.label }}
           repo_name: ${{ inputs.repo_name }}
           branch: ${{ inputs.branch }}
-          token: ${{ secrets.GENDLOOP_ACCESS_TOKEN }}
