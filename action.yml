@@ -28,7 +28,6 @@ runs:
       shell: bash
       run: |
         # config
-        echo $GITHUB_ACTOR
         if [ "$GITHUB_ACTOR" != "${{ github.repository_owner }}" ]; then
           git config --global user.name "gendloop"
           git config --global user.email "gendloop@163.com"
@@ -41,7 +40,7 @@ runs:
         # add-submodule
         git submodule add -b ${{ inputs.branch }} "https://github.com/${{ github.repository_owner }}/${{ inputs.repo_name }}"
         git submodule init
-        git submodule update
+        # git submodule update
         git add .
         git commit -m "feat: add submodule ${{ inputs.repo_name }}"
         git push
