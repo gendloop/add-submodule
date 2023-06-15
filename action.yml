@@ -52,7 +52,7 @@ runs:
     - name: update-README.md
       shell: bash
       run: |
-        sed -i '3i [![${{ inputs.repo_name }}](https://img.shields.io/static/v1?label=${{ inputs.label }}&message=${{ inputs.repo_name }}&color=blue)](https://github.com/gendloop/${{ inputs.repo_name }}/tree/${{ inputs.branch }}) ' README.md
+        sed -i '3i [![${{ inputs.repo_name }}](https://img.shields.io/static/v1?label=${{ inputs.label }}&message=${{ inputs.repo_name }}&color=blue)](https://github.com/${{ github.repository_owner }}/${{ inputs.repo_name }}/tree/${{ inputs.branch }}) ' README.md
         git add .
         git commit -m "chore: update README.md"
         git push
