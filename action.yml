@@ -37,10 +37,11 @@ runs:
         fi
         git config user.name
         git config user.email
+        ssh -T git@github.com
         # add-submodule
         git submodule add -b ${{ inputs.branch }} "https://github.com/${{ github.repository_owner }}/${{ inputs.repo_name }}"
         git submodule init
-        # git submodule update
+        git submodule update
         git add .
         git commit -m "feat: add submodule ${{ inputs.repo_name }}"
         git push
