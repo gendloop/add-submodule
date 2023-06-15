@@ -35,6 +35,8 @@ runs:
           git config --global user.name "$GITHUB_ACTOR"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         fi
+        git config user.name
+        git config user.email
         # add-submodule
         git submodule add -b ${{ inputs.branch }} "https://github.com/${{ github.repository_owner }}/${{ inputs.repo_name }}"
         git submodule init
