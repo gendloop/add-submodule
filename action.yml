@@ -28,10 +28,15 @@ runs:
       shell: bash
       run: |
         # config
-        git config --global user.name "$GITHUB_ACTOR"
-        git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        if [ -z "$GITHUB_ACTOR" ]; then
+          git config --global user.name "gendloop"
+          git config --global user.email "gendloop@163.com"
+        else
+          git config --global user.name "$GITHUB_ACTOR"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        fi
         # add-submodule
-        git submodule add -b ${{ inputs.branch }} https://github.com/${{ github.repository_owner }}/${{ inputs.repo_name }}
+        git submodule add -b ${{ inputs.branch }} "https://github.com/${{ github.repository_owner }}/${{ inputs.repo_name }}"
         git submodule init
         git submodule update
         git add .
