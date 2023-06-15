@@ -28,7 +28,7 @@ runs:
       shell: bash
       run: |
         # config
-        if [ -z "$GITHUB_ACTOR" ]; then
+        if ["$GITHUB_ACTOR" != "${{ github.repository_owner }}" ]; then
           git config --global user.name "gendloop"
           git config --global user.email "gendloop@163.com"
         else
