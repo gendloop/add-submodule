@@ -15,6 +15,10 @@ inputs:
     description: 'Default Branch'
     required: true
     default: 'main'
+  token:
+    description: 'Personal Token'
+    required: false
+    default: ${{ github.token }}
 
 runs:
   using: 'composite'
@@ -22,7 +26,7 @@ runs:
     - name: checkout
       uses: actions/checkout@v3
       with:
-        token: ${{ github.token }}
+        token: ${{ inputs.token }}
 
     - name: add-submodule
       shell: bash
@@ -35,9 +39,8 @@ runs:
           git config --global user.name "$GITHUB_ACTOR"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         fi
-        git config user.name
-        git config user.email
-        ssh -T git@github.com
+        git config --global credential.helper store
+        echo "machine github.com login ${{ github.actor }} password ${{ inputs.token }}" > ~/.netrc
         # add-submodule
         git submodule add -b ${{ inputs.branch }} "https://github.com/${{ github.repository_owner }}/${{ inputs.repo_name }}"
         git submodule init
